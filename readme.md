@@ -10,3 +10,9 @@
 <img src="https://img.shields.io/badge/java-500f00?style=for-the-badge&logo=java&logoColor=white" />
 <img src="https://img.shields.io/badge/mysql-0FAAFF?style=for-the-badge&logo=mysql&logoColor=white" />
 <img src="https://img.shields.io/badge/Git-E34F26?style=for-the-badge&logo=git&logoColor=white" />
+
+## Comandos para usar
+```shell
+git init
+git clone https://github.com/wagner-sousa/git-senac.git ./
+```
