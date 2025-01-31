@@ -1,0 +1,44 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/java
+{
+	"name": "Java",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/java:1-21-bookworm",
+
+	"features": {
+		"ghcr.io/devcontainers/features/java:1": {
+			"installGradle": true,
+			"installMaven": true,
+			"installAnt": true,
+			"installGroovy": true,
+			"version": "latest",
+			"jdkDistro": "ms",
+			"gradleVersion": "latest",
+			"mavenVersion": "latest",
+			"antVersion": "latest",
+			"groovyVersion": "latest"
+		}
+	},
+
+		// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "java -version",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+
+	"runArgs": [
+		"--env", "DISPLAY=${env:DISPLAY}",
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+		"--env", "QT_X11_NO_MITSHM=1"
+	],
+	"mounts": [
+     //"source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind"
+	],
+	"postCreateCommand": "sudo apt-get update && sudo apt-get install -y libfreetype6 libxext6 libxrender1 libxtst6 libxi6 fontconfig fonts-dejavu && echo -e '\\033[0;31mPlease run \\033[0;32mxhost +local:docker\\033[0m on the host system to enable graphical applications.'"
+}
