@@ -8,9 +8,8 @@
  * @author Adm
  */
 
-import java.sql.PreparedStatement;
 import java.sql.Connection;
-import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -22,15 +21,28 @@ public class ProdutosDAO {
     ResultSet resultset;
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
     
-    public void cadastrarProduto (ProdutosDTO produto){
-        
-        
-        //conn = new conectaDAO().connectDB();
-        
-        
+    public void cadastrarProduto (ProdutosDTO produto) throws Exception {
+        this.conn = new conectaDAO().connectDB();
+        this.prep = this.conn.prepareStatement("INSERT INTO produtos (nome, valor, status) VALUES (?,?,?)");
+        this.prep.setString(1, produto.getNome());
+        this.prep.setInt(2, produto.getValor());
+        this.prep.setString(3, produto.getStatus());
+        this.prep.execute();
     }
     
-    public ArrayList<ProdutosDTO> listarProdutos(){
+    public ArrayList<ProdutosDTO> listarProdutos() throws Exception {
+        this.conn = new conectaDAO().connectDB();
+        this.prep = this.conn.prepareStatement("SELECT * FROM produtos");
+        this.resultset = this.prep.executeQuery();
+        
+        while (this.resultset.next()) {
+            ProdutosDTO produto = new ProdutosDTO();
+            produto.setId(this.resultset.getInt("id"));
+            produto.setNome(this.resultset.getString("nome"));
+            produto.setValor(this.resultset.getInt("valor"));
+            produto.setStatus(this.resultset.getString("status"));
+            listagem.add(produto);
+        }
         
         return listagem;
     }
