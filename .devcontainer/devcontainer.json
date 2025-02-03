@@ -35,10 +35,19 @@
 	"runArgs": [
 		"--env", "DISPLAY=${env:DISPLAY}",
 		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
-		"--env", "QT_X11_NO_MITSHM=1"
+		"--env", "QT_X11_NO_MITSHM=1",
+		"--network=mysql_phpmyadmin_network" 
 	],
 	"mounts": [
      //"source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind"
 	],
+	
+	"remoteEnv": {
+		"MYSQL_HOST": "mysql-database",
+		"MYSQL_PORT": "3306",
+		"MYSQL_USER": "root",
+		"MYSQL_PASSWORD": "root@123"
+	},
+
 	"postCreateCommand": "sudo apt-get update && sudo apt-get install -y libfreetype6 libxext6 libxrender1 libxtst6 libxi6 fontconfig fonts-dejavu && echo -e '\\033[0;31mPlease run \\033[0;32mxhost +local:docker\\033[0m on the host system to enable graphical applications.'"
 }
