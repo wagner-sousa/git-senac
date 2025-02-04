@@ -35,6 +35,18 @@ public class ProdutosDAO {
         this.prep = this.conn.prepareStatement("SELECT * FROM produtos");
         this.resultset = this.prep.executeQuery();
         
+        return this.montarListagem();
+    }
+
+    public ArrayList<ProdutosDTO> listarProdutosVendidos() throws Exception {
+        this.conn = new conectaDAO().connectDB();
+        this.prep = this.conn.prepareStatement("SELECT * FROM produtos WHERE status = 'Vendido'");
+        this.resultset = this.prep.executeQuery();
+        
+        return this.montarListagem();
+    }
+
+    private ArrayList<ProdutosDTO> montarListagem() throws Exception {
         while (this.resultset.next()) {
             ProdutosDTO produto = new ProdutosDTO();
             produto.setId(this.resultset.getInt("id"));
