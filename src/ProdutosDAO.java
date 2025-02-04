@@ -47,7 +47,12 @@ public class ProdutosDAO {
         return listagem;
     }
     
-    
+    public void venderProduto (Integer produtoId) throws Exception {
+        this.conn = new conectaDAO().connectDB();
+        this.prep = this.conn.prepareStatement("UPDATE produtos SET status = 'Vendido' WHERE id = ?;");
+        this.prep.setInt(1, produtoId);
+        this.prep.execute();
+    }
     
         
 }
